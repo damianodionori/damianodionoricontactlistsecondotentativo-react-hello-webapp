@@ -36,7 +36,7 @@ export const Demo = () => {
 							<p>{item.address}</p>
 							<p>{item.phone}</p>
 							<Link to={`/contact/edit/${item.id}`}>
-								<button className="btn btn-secondary" onClick={() => handleDeleteContact(item.id)}>Edit this contact</button>
+								<button className="btn btn-secondary" onClick={() => handleEditContact(item.id)}>Edit this contact</button>
 							</Link>
 							<button className="btn btn-danger" onClick={() => handleDeleteContact(item.id)}>Delete this contact</button>
 						</li>
