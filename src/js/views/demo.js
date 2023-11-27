@@ -8,6 +8,18 @@ import "../../styles/demo.css";
 export const Demo = () => {
 	const { store, actions } = useContext(Context);
 
+	const handleCreateContact = () => {
+		actions.addContact({
+			fullName: "Damiano Dionori",
+			email: "d.dionori@gmail.com",
+			agendaSlug: "damianodionori",
+			address: "Italia",
+			phone: "+39 123456789",
+		})
+	}
+
+	const handleDeleteContact = (id) => actions.deleteContact(id);
+
 	useEffect(() => actions.getAgenda(), []);
 	
 	return (
@@ -19,15 +31,14 @@ export const Demo = () => {
 						<li
 							key={index}
 							className="list-group-item d-flex justify-content-between">
-							placeholder
+							<p>{item.fullName}</p>
+							<button className="btn btn-danger" onClick={() => handleDeleteContact(item.id)}>Delete this contact</button>
 						</li>
 					);
 				})}
 			</ul>
 			<br />
-			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
-			</Link>
+			<button className="btn btn-primary" onClick={handleCreateContact}>Create your first contact!</button>
 		</div>
 	);
 };
