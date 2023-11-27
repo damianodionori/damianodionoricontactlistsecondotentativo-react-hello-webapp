@@ -13,10 +13,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			deleteContact: async (id) => {
 				const actions = getActions();
-				await fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
-					method: "DELETE",
-				})
-				await actions.getAgenda();
+				try {
+					await fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
+						method: "DELETE",
+					});
+					await actions.getAgenda();
+				} catch (error) {
+					console.error("Error deleting contact:", error);
+				}
 			},
 
 			addContact: async (contactData) => {
