@@ -20,7 +20,7 @@ export const Demo = () => {
 
 	const handleDeleteContact = (id) => actions.deleteContact(id);
 
-	useEffect(() => actions.getAgenda(), []);
+	useEffect(() => {actions.getAgenda()}, []);
 	
 	return (
 		<div className="container">
@@ -32,6 +32,12 @@ export const Demo = () => {
 							key={index}
 							className="list-group-item d-flex justify-content-between">
 							<p>{item.fullName}</p>
+							<p>{item.email}</p>
+							<p>{item.address}</p>
+							<p>{item.phone}</p>
+							<Link to={`/contact/edit/${item.id}`}>
+								<button className="btn btn-secondary" onClick={() => handleDeleteContact(item.id)}>Edit this contact</button>
+							</Link>
 							<button className="btn btn-danger" onClick={() => handleDeleteContact(item.id)}>Delete this contact</button>
 						</li>
 					);
