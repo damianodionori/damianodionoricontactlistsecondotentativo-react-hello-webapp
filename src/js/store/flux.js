@@ -33,7 +33,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			editContact: async (id, updatedContactData) => {
-				const { getStore, setStore } = getActions();
 				const store = getStore();
 
 				try {
@@ -57,8 +56,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			addContact: async (contactData) => {
-				const { getStore, setStore } = getActions();
-				const store = getStore();
 			
 				console.log('Current contacts:', store.contacts);
 			
@@ -70,19 +67,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"phone": contactData.phone,
 				};
 			
-				setStore({ contacts: [...store.contacts, newContact], errorMessage: null });
-			
 				try {
 					const response = await fetch("https://playground.4geeks.com/apis/fake/contact", {
 						method: "POST",
 						headers: { "Content-type": "application/json" },
-						body: JSON.stringify({
-							"full_name": newContact.full_name,
-							"email": newContact.email,
-							"agenda_slug": newContact.agenda_slug,
-							"address": newContact.address,
-							"phone": newContact.phone,
-						}),
+						body: JSON.stringify(newContact),
 					});
 			
 					if (!response.ok) {

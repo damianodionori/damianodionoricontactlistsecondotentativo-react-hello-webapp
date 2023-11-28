@@ -1,10 +1,12 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/demo.css";
 
 export const Demo = () => {
     const { store, actions } = useContext(Context);
+
+	const navigate = useNavigate();
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -14,8 +16,9 @@ export const Demo = () => {
 
     const [showForm, setShowForm] = useState(false);
 
-	const handleCreateContact = async () => {
-        if (!firstName || !lastName || !email || !address || !phone) {
+	const handleCreateContact = async (e) => {
+        e.preventDefault();
+		if (!firstName || !lastName || !email || !address || !phone) {
             alert('Please fill in all required fields.');
             return;
         }
@@ -34,14 +37,13 @@ export const Demo = () => {
         setAddress('');
         setPhone('');
 
-        setShowForm(false);
+		navigate("/")
     };
 
 	return (
 		<div className="container">
 			{/* Conditional rendering of the form */}
-			{showForm && (
-				<form>
+				<form onSubmit={(e) => handleCreateContact(e)}>
 					<label className="input-group">
 						<span className="input-group-text">First and last name</span>
 						<input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} aria-label="First name" className="form-control" placeholder="First Name" />
@@ -63,19 +65,13 @@ export const Demo = () => {
 						<input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} class="form-control" placeholder="Phone number" aria-label="Phone number" aria-describedby="addon-wrapping" />
 					</label>
 					<br />
-					<button type="button" className="btn btn-primary" onClick={handleCreateContact}>
-						Create your contact
-					</button>
+					<input type="submit" className="btn btn-primary" value={"Create your contact"}></input>
 				</form>
-			)}
 
 			<ul className="list-group">
 				{/* ... (your existing contact list rendering) */}
 			</ul>
 			<br />
-			<button className="btn btn-primary" onClick={() => setShowForm(true)}>
-				Create a new contact!
-			</button>
 			<Link to="/">
                 <button className="btn btn-primary">
                     Go Home

@@ -1,10 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext"; // Make sure to adjust the path accordingly
 
 export const Home = () => {
 	const { store, actions } = useContext(Context); // Use useContext instead of useStore
 	const [editMode, setEditMode] = useState(null);
+
+	useEffect(() => {
+		actions.getAgenda();
+	}, []);
 
 	const handleDeleteContact = (id) => {
 		actions.deleteContact(id);
@@ -19,7 +23,6 @@ export const Home = () => {
 		const updatedContacts = [...store.contacts];
 		const editedContact = updatedContacts[index];
 		editedContact[field] = updatedValue;
-		// setActions({ contacts: updatedContacts });
 	};
 
 	const handleSaveContact = (id, updatedContact) => {
@@ -54,8 +57,8 @@ export const Home = () => {
 									<p>{item.address}</p>
 									<p>{item.phone}</p>
 									{/* Edit button */}
-									<Link to="/contact/edit/:contactId">
-										<button className="btn btn-warning" onClick={() => handleEditContact(index)}>
+									<Link to={`/contact/edit/${item.id}`}>
+										<button className="btn btn-warning">
 											Edit
 										</button>
 									</Link>
@@ -70,7 +73,7 @@ export const Home = () => {
 			</ul>
 			<br />
 			<Link to="/demo">
-				<button className="btn btn-primary" onClick={() => setShowForm(true)}>
+				<button className="btn btn-primary">
 					Create a new contact!
 				</button>
 			</Link>
