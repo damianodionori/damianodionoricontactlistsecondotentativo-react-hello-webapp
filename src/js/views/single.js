@@ -10,17 +10,18 @@ export const Single = () => {
 	const currentContact = store.contacts.find(contact => contact.id.toString() === params.contactId);
   
 	const handleEditContact = () => {
-	  const editedContactData = {
-		fullName: "Updated Name",
-		email: "updated@email.com",
-		address: "Updated Address",
-		phone: "Updated Phone",
+		const updatedContactData = {
+		  full_name: "Updated Name",
+		  email: "updated@email.com",
+		  address: "Updated Address",
+		  phone: "Updated Phone",
+		};
+	  
+		actions.editContact(currentContact.id, updatedContactData);
+		history.push(`/contact/${currentContact.id}`);
 	  };
-	  actions.editContact(currentContact.id, editedContactData);
-	};
   
 	const handleDeleteContact = () => {
-	  // Handle the delete logic here, you can use actions.deleteContact
 	  const isConfirmed = window.confirm("Are you sure you want to delete this contact?");
 	  if (isConfirmed) {
 		actions.deleteContact(currentContact.id);
