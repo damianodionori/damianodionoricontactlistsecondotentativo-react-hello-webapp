@@ -1,46 +1,41 @@
-// demo.js
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-
 import { Context } from "../store/appContext";
-
 import "../../styles/demo.css";
 
 export const Demo = () => {
-	const { store, actions } = useContext(Context);
+    const { store, actions } = useContext(Context);
 
-	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
-	const [email, setEmail] = useState('');
-	const [address, setAddress] = useState('');
-	const [phone, setPhone] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
 
-	// State variable to track whether the form should be displayed
-	const [showForm, setShowForm] = useState(false);
+    const [showForm, setShowForm] = useState(false);
 
 	const handleCreateContact = async () => {
-		if (!firstName || !lastName || !email || !address || !phone) {
-			alert('Please fill in all required fields.');
-			return;
-		}
+        if (!firstName || !lastName || !email || !address || !phone) {
+            alert('Please fill in all required fields.');
+            return;
+        }
 
-		actions.addContact({
-			firstName,
-			lastName,
-			email,
-			address,
-			phone,
-		});
+        actions.addContact({
+            firstName,
+            lastName,
+            email,
+            address,
+            phone,
+        });
 
 		setFirstName('');
-		setLastName('');
-		setEmail('');
-		setAddress('');
-		setPhone('');
+        setLastName('');
+        setEmail('');
+        setAddress('');
+        setPhone('');
 
-		// Hide the form after creating the contact
-		setShowForm(false);
-	};
+        setShowForm(false);
+    };
 
 	return (
 		<div className="container">
@@ -75,30 +70,17 @@ export const Demo = () => {
 			)}
 
 			<ul className="list-group">
-				{store.contacts.length === 0 ? (
-					<span>No contacts so far</span>
-				) : (
-					store.contacts.map((item, index) => {
-						return (
-							<li key={index} className="list-group-item d-flex justify-content-between">
-								{/* ... (your existing contact list rendering) */}
-								<Link to={`/contact/edit/${item.id}`}>
-									<button className="btn btn-secondary" onClick={() => handleEditContact(item.id)}>
-										Edit this contact
-									</button>
-								</Link>
-								<button className="btn btn-danger" onClick={() => handleDeleteContact(item.id)}>
-									Delete this contact
-								</button>
-							</li>
-						);
-					})
-				)}
+				{/* ... (your existing contact list rendering) */}
 			</ul>
 			<br />
 			<button className="btn btn-primary" onClick={() => setShowForm(true)}>
 				Create a new contact!
 			</button>
+			<Link to="/">
+                <button className="btn btn-primary">
+                    Go to Home
+                </button>
+            </Link>
 		</div>
 	);
 };

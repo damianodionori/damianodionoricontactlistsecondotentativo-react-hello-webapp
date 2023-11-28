@@ -1,33 +1,60 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Single = props => {
+export const Single = () => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
-
+  
 	const currentContact = store.contacts.find(contact => contact.id.toString() === params.contactId);
-
-	const handleSaveEditedContact = () => {
-		actions.editContact({
-			id,
-		})
-	}
-
+  
+	const handleEditContact = () => {
+	  const editedContactData = {
+		fullName: "Updated Name",
+		email: "updated@email.com",
+		address: "Updated Address",
+		phone: "Updated Phone",
+	  };
+	  actions.editContact(currentContact.id, editedContactData);
+	};
+  
+	const handleDeleteContact = () => {
+	  // Handle the delete logic here, you can use actions.deleteContact
+	  const isConfirmed = window.confirm("Are you sure you want to delete this contact?");
+	  if (isConfirmed) {
+		actions.deleteContact(currentContact.id);
+	  }
+	};
+  
 	return (
+	  <div className="container">
 		<div className="jumbotron">
-			{currentContact && (<p>{currentContact.full_name}</p>)}
-
-			<Link to="/">
-				<span className="btn btn-primary btn-lg" href="#" role="button">
-					Back home
-				</span>
-			</Link>
+		  {currentContact && (
+			<div>
+			  <p>{currentContact.full_name}</p>
+			  <p>{currentContact.email}</p>
+			  <p>{currentContact.address}</p>
+			  <p>{currentContact.phone}</p>
+			  <button className="btn btn-secondary" onClick={handleEditContact}>
+				Edit this contact
+			  </button>
+			  <button className="btn btn-danger" onClick={handleDeleteContact}>
+				Delete this contact
+			  </button>
+			</div>
+		  )}
+  
+		  <Link to="/">
+			<span className="btn btn-primary btn-lg" role="button">
+			  Back home
+			</span>
+		  </Link>
 		</div>
+	  </div>
 	);
-};
-
-Single.propTypes = {
+  };
+  
+  Single.propTypes = {
 	match: PropTypes.object
-};
+  };
