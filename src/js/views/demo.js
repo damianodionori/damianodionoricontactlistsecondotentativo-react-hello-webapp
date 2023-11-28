@@ -78,7 +78,7 @@ export const Demo = () => {
 			</button>
 			<Link to="/">
                 <button className="btn btn-primary">
-                    Go to Home
+                    Go Home
                 </button>
             </Link>
 		</div>

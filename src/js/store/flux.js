@@ -36,31 +36,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const { getStore, setStore } = getActions();
 				const store = getStore();
 
-				// Find the index of the contact to be updated
-				const contactIndex = store.contacts.findIndex((contact) => contact.id === id);
+				try {
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
+						method: 'PUT',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(updatedContactData),
+					});
 
-				if (contactIndex !== -1) {
-					// Create a copy of the contacts array
-					const updatedContacts = [...store.contacts];
+					if (!response.ok) {
+						throw new Error(`Failed to update contact. Server returned ${response.status}`);
+					}
 
-					// Update the contact with the new data
-					updatedContacts[contactIndex] = {
-						...updatedContacts[contactIndex],
-						...updatedContactData,
-					};
-
-					// Update the store with the modified contacts array
-					setStore({ contacts: updatedContacts, errorMessage: null });
-				} else {
-					console.error(`Contact with id ${id} not found.`);
-					setStore({ errorMessage: 'Contact not found. Unable to edit.' });
+					setStore({ contacts: store.contacts, errorMessage: null });
+				} catch (error) {
+					console.error('Error updating contact:', error);
+					setStore({ errorMessage: 'Failed to update contact. Please try again.' });
 				}
 			},
 
 			addContact: async (contactData) => {
 				const { getStore, setStore } = getActions();
 				const store = getStore();
-
+			
+				console.log('Current contacts:', store.contacts);
+			
 				const newContact = {
 					"full_name": `${contactData.firstName} ${contactData.lastName}`,
 					"email": contactData.email,
@@ -68,9 +69,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"address": contactData.address,
 					"phone": contactData.phone,
 				};
-
+			
 				setStore({ contacts: [...store.contacts, newContact], errorMessage: null });
-
+			
 				try {
 					const response = await fetch("https://playground.4geeks.com/apis/fake/contact", {
 						method: "POST",
@@ -83,14 +84,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"phone": newContact.phone,
 						}),
 					});
-
+			
 					if (!response.ok) {
 						throw new Error(`Failed to add contact. Server returned ${response.status}`);
 					}
+			
+					// Log the updated state after adding the contact
+					console.log('Updated contacts:', getStore().contacts);
 				} catch (error) {
 					console.error("Error adding contact:", error);
 					setStore({ errorMessage: 'Failed to add contact. Please try again.' });
-
+			
 					// Rollback the store in case of an error
 					setStore({ contacts: store.contacts, errorMessage: 'Failed to add contact. Please try again.' });
 				}
