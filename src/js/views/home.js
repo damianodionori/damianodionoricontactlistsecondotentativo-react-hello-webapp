@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext"; // Make sure to adjust the path accordingly
 
 export const Home = () => {
-	const { store, actions } = useStore();
+	const { store, actions } = useContext(Context); // Use useContext instead of useStore
 	const [editMode, setEditMode] = useState(null);
 
 	const handleDeleteContact = (id) => {
@@ -14,8 +15,12 @@ export const Home = () => {
 	};
 
 	const handleEditChange = (e, index, field) => {
-		
-    };
+		const updatedValue = e.target.value;
+		const updatedContacts = [...store.contacts];
+		const editedContact = updatedContacts[index];
+		editedContact[field] = updatedValue;
+		// setActions({ contacts: updatedContacts });
+	};
 
 	const handleSaveContact = (id, updatedContact) => {
 		actions.updateContact(id, updatedContact);
