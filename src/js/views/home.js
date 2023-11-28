@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import getState from "../store/flux";
 
 export const Home = () => {
 	const { store, actions } = useStore();
@@ -50,9 +49,11 @@ export const Home = () => {
 									<p>{item.address}</p>
 									<p>{item.phone}</p>
 									{/* Edit button */}
-									<button className="btn btn-warning" onClick={() => handleEditContact(index)}>
-										Edit
-									</button>
+									<Link to="/contact/edit/:contactId">
+										<button className="btn btn-warning" onClick={() => handleEditContact(index)}>
+											Edit
+										</button>
+									</Link>
 									<button className="btn btn-danger" onClick={() => handleDeleteContact(item.id)}>
 										Delete
 									</button>
@@ -63,9 +64,11 @@ export const Home = () => {
 				)}
 			</ul>
 			<br />
-			<button className="btn btn-primary" onClick={() => setShowForm(true)}>
-				Create a new contact!
-			</button>
+			<Link to="/demo">
+				<button className="btn btn-primary" onClick={() => setShowForm(true)}>
+					Create a new contact!
+				</button>
+			</Link>
 		</div>
 	);
 };
