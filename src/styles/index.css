@@ -1,3 +1,11 @@
 /* 
     General Styles
 */
+#icon {
+    width: 100px;
+    margin-left: 5px;
+}
+
+#contact {
+    margin-right: 5px;
+}
