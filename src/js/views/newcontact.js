@@ -18,9 +18,7 @@ export const NewContact = props => {
             phone: e.target.elements.inputPhone.value,
             email: e.target.elements.inputEmail.value
         };
-        
         actions.addContact (createData);
-       
     };
 
 

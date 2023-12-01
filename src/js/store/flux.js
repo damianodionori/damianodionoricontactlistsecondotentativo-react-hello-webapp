@@ -73,7 +73,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			editContact: async (id, contacts) => {
 				const actions = getActions ();
-				const editContact = {
+				const editedContact = {
 					"full_name": contacts.full_name,
 					"email": contacts.email,
 					"agenda_slug": "damianodionori",
@@ -85,7 +85,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const response = await fetch (`https://playground.4geeks.com/apis/fake/contact/${id}`,{
 						method: "PUT",
 						headers: {"Content-Type": "application/json"},
-						body: JSON.stringify (editContact),
+						body: JSON.stringify (editedContact),
 					});
 					if (response.ok) {
 						alert ("Contact fixed, good to go!");
