@@ -46,26 +46,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			deleteContact: async (contactId) => {
+			deleteContact: async (contact_id) => {
 				const store = getStore();
 				try {
 					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${contact_id}`, {
 						method: "DELETE",
 					});
-
+			
 					if (!response.ok) {
 						console.error("Failed to delete contact", response.statusText);
 						return;
 					}
-
+			
 					const actions = getActions();
 					actions.getAgenda();
-
-					setStore({ contacts: store.contacts.filter(contact => contact.contact_id !== contactId) });
+			
+					setStore({ contacts: store.contacts.filter(contact => contact.contact_id !== contact_id) });
 				} catch (error) {
 					console.error("Error during fetch:", error);
 				}
-			},
+			},			
 
 		},
 
