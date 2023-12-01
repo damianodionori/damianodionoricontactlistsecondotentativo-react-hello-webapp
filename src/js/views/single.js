@@ -6,7 +6,7 @@ import { Context } from "../store/appContext";
 export const Single = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
-	const currentContact = store.contacts.find(contact => contact.id.toString() === params.contactId);
+	const currentContact = store.contacts.find(contact => contact.id.toString() === params.id);
 
 	const [editData, setEditData] = useState({
 		full_name: "",
@@ -38,7 +38,7 @@ export const Single = props => {
 		});
 	};
 
-	console.log(params.contactId);
+	console.log(params.id);
 
 	const handleEditContact = (e) => {
 		e.preventDefault();
