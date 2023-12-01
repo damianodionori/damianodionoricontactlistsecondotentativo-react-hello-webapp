@@ -13,10 +13,11 @@ export const NewContact = props => {
         e.preventDefault();
 
         const createData = {
-            full_name: e.target.elements.inputName.value,
+            first_name: e.target.elements.inputFirstName.value,
+            last_name: e.target.elements.inputLastName.value,
             address: e.target.elements.inputAddress.value,
             phone: e.target.elements.inputPhone.value,
-            email: e.target.elements.inputEmail.value
+            email: e.target.elements.inputEmail.value,
         };
         actions.addContact(createData)
     }
@@ -28,8 +29,12 @@ export const NewContact = props => {
 
         <form onSubmit={handleSubmit}>
             <div className="form-group col-4">
-                <label for="inputName">Full Name</label>
-                <input type="text" className="form-control" id="inputName" name="inputName" placeholder="Enter full name"></input>
+                <label for="inputFirstName">First Name</label>
+                <input type="text" className="form-control" id="inputFirstName" name="inputFirstName" placeholder="First name"></input>
+            </div>
+            <div className="form-group col-4">
+                <label for="inputLastName">Last Name</label>
+                <input type="text" className="form-control" id="inputLastName" name="inputLastName" placeholder="Last name"></input>
             </div>
             <div className="form-group col-4">
                 <label for="inputAddress">Address</label>
