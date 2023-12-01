@@ -31,14 +31,13 @@ export const Single = props => {
 	const handleEditContact = (e) => {
 		e.preventDefault();
 
-		const updatedData = {
-			full_name: e.target.elements.inputName.value,
-			address: e.target.elements.inputAddress.value,
-			phone: e.target.elements.inputPhone.value,
-			email: e.target.elements.inputEmail.value,
-		};
+		const { full_name, address, phone, email } = editData;
+		if (!full_name && !address && !phone && !email) {
+			alert('Please edit at least one field.');
+			return;
+		}
 
-		actions.editContact(params.contactId, updatedData);
+		actions.editContact(params.contactId, editData);
 	};
 
 	const handleInputChange = (e) => {

@@ -72,7 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			editContact: async (id, contacts) => {
-				const actions = getActions ();
+				const actions = getActions();
 				const editedContact = {
 					"full_name": contacts.full_name,
 					"email": contacts.email,
@@ -80,24 +80,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"address": contacts.address,
 					"phone": contacts.phone
 				};
-				
+
 				try {
-					const response = await fetch (`https://playground.4geeks.com/apis/fake/contact/${id}`,{
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
 						method: "PUT",
-						headers: {"Content-Type": "application/json"},
-						body: JSON.stringify (editedContact),
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(editedContact),
 					});
 					if (response.ok) {
-						alert ("Contact fixed, good to go!");
+						alert("Contact fixed, good to go!");
 					} else {
-						console.error ("Failed to edit contact:", response.statusText);
+						console.error("Failed to edit contact:", response.statusText);
 						return;
 					}
 					await actions.getAgenda();
-					
+
 				} catch (error) {
-					console.error ("Error editing contact:", error.message);
-					alert ("Not quite, give it another go!")
+					console.error("Error editing contact:", error.message);
+					alert("Not quite, give it another go!")
 				}
 			},
 

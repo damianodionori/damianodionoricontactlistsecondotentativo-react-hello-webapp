@@ -11,24 +11,24 @@ export const NewContact = props => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         const full_name = e.target.elements.inputName.value;
         const address = e.target.elements.inputAddress.value;
         const phone = e.target.elements.inputPhone.value;
         const email = e.target.elements.inputEmail.value;
-    
+
         if (!full_name || !address || !phone || !email) {
             alert('Please fill in all required fields.');
             return;
         }
-    
+
         const createData = {
             full_name,
             address,
             phone,
             email
         };
-    
+
         actions.addContact(createData);
     };
 
@@ -37,7 +37,7 @@ export const NewContact = props => {
             <div className="form-group col-4">
                 <label htmlFor="inputName">Full Name</label>
                 <input type="text" className="form-control" id="inputName" name="inputName" placeholder="Enter full name"></input>
-            </div>              
+            </div>
             <div className="form-group col-4">
                 <label htmlFor="inputAddress">Address</label>
                 <input type="text" className="form-control" id="inputAddress" name="inputAddress" placeholder="Enter Address"></input>
@@ -51,14 +51,14 @@ export const NewContact = props => {
                 <input type="email" className="form-control" id="inputEmail" name="inputEmail" placeholder="Enter email"></input>
             </div>
             <button type="submit" className="btn btn-success mt-3">Submit</button>
-           
 
-            </form>
-         
-        )
-        
-     }
-     
-     NewContact.propTypes = {
-         match: PropTypes.object
-     };
+
+        </form>
+
+    )
+
+}
+
+NewContact.propTypes = {
+    match: PropTypes.object
+};
