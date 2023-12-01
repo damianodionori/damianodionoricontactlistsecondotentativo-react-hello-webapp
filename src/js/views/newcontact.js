@@ -11,22 +11,28 @@ export const NewContact = props => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+    
+        const full_name = e.target.elements.inputName.value;
+        const address = e.target.elements.inputAddress.value;
+        const phone = e.target.elements.inputPhone.value;
+        const email = e.target.elements.inputEmail.value;
+    
+        if (!full_name || !address || !phone || !email) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+    
         const createData = {
-            full_name: e.target.elements.inputName.value,
-            address: e.target.elements.inputAddress.value,
-            phone: e.target.elements.inputPhone.value,
-            email: e.target.elements.inputEmail.value
+            full_name,
+            address,
+            phone,
+            email
         };
-        actions.addContact (createData);
+    
+        actions.addContact(createData);
     };
 
-
-
-
     return (
-
-
         <form onSubmit={handleSubmit}>
             <div className="form-group col-4">
                 <label htmlFor="inputName">Full Name</label>
