@@ -17,12 +17,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			addContact: async (contacts) => {
 				const newContact = {
-					first_name: contacts.first_name,
-					last_name: contacts.last_name,
-					email: contacts.email,
-					agenda_slug: "damianodionori",
-					address: contacts.address,
-					phone: contacts.phone,
+					"full_name": contacts.full_name,
+					"email": contacts.email,
+					"agenda_slug": "damianodionori",
+					"address": contacts.address,
+					"phone": contacts.phone,
 				};
 
 				const store = getStore();
@@ -33,7 +32,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(newContact),
 					});
 
-					if (!response.ok) {
+					if (response.ok) {
+						alert("Contact was successfully added!");
+					} else {
 						console.error("Failed to add contact", response.statusText);
 						return;
 					}
@@ -46,30 +47,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			deleteContact: async (contact_id) => {
-				const store = getStore();
+			deleteContact: async (id) => {
+				const actions = getActions();
+
 				try {
-					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${contact_id}`, {
-						method: "DELETE",
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
+						method: "DELETE"
 					});
-			
-					if (!response.ok) {
-						console.error("Failed to delete contact", response.statusText);
+
+					console.log(response);
+
+					if (response.ok) {
+						alert("Contact was deleted!");
+					} else {
+						console.error("Failed to delete contact:", response.statusText);
 						return;
 					}
-			
-					const actions = getActions();
-					actions.getAgenda();
-			
-					setStore({ contacts: store.contacts.filter(contact => contact.contact_id !== contact_id) });
+					await actions.getAgenda();
 				} catch (error) {
-					console.error("Error during fetch:", error);
+					console.error("Error deleting contact:", error.message);
+					alert("Failed to delete contact. Please try again");
 				}
-			},			
+			},
 
 		},
-
-		//deleteContact:
 	};
 };
 

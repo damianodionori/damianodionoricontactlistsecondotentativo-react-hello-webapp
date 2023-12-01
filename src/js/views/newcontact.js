@@ -13,14 +13,16 @@ export const NewContact = props => {
         e.preventDefault();
 
         const createData = {
-            first_name: e.target.elements.inputFirstName.value,
-            last_name: e.target.elements.inputLastName.value,
+            full_name: e.target.elements.inputName.value,
             address: e.target.elements.inputAddress.value,
             phone: e.target.elements.inputPhone.value,
-            email: e.target.elements.inputEmail.value,
+            email: e.target.elements.inputEmail.value
         };
-        actions.addContact(createData)
-    }
+        
+        actions.addContact (createData);
+       
+    };
+
 
 
 
@@ -29,13 +31,9 @@ export const NewContact = props => {
 
         <form onSubmit={handleSubmit}>
             <div className="form-group col-4">
-                <label for="inputFirstName">First Name</label>
-                <input type="text" className="form-control" id="inputFirstName" name="inputFirstName" placeholder="First name"></input>
-            </div>
-            <div className="form-group col-4">
-                <label for="inputLastName">Last Name</label>
-                <input type="text" className="form-control" id="inputLastName" name="inputLastName" placeholder="Last name"></input>
-            </div>
+                <label for="inputName">Full Name</label>
+                <input type="text" className="form-control" id="inputName" name="inputName" placeholder="Enter full name"></input>
+            </div>              
             <div className="form-group col-4">
                 <label for="inputAddress">Address</label>
                 <input type="text" className="form-control" id="inputAddress" name="inputAddress" placeholder="Enter Address"></input>
@@ -48,15 +46,15 @@ export const NewContact = props => {
                 <label for="inputEmail">Email</label>
                 <input type="email" className="form-control" id="inputEmail" name="inputEmail" placeholder="Enter email"></input>
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-success mt-3">Submit</button>
+           
 
-
-        </form>
-
-    )
-
-}
-
-NewContact.propTypes = {
-    match: PropTypes.object
-};
+            </form>
+         
+        )
+        
+     }
+     
+     NewContact.propTypes = {
+         match: PropTypes.object
+     };
