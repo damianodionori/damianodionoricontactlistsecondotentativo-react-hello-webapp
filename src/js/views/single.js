@@ -6,9 +6,7 @@ import { Context } from "../store/appContext";
 export const Single = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
-
-	const currentContact = store.contacts.find
-		(contact => contact.id.toString() === params.contactId);
+	const currentContact = store.contacts.find(contact => contact.id.toString() === params.contactId);
 
 	const [editData, setEditData] = useState({
 		full_name: "",
@@ -28,6 +26,20 @@ export const Single = props => {
 		}
 	}, [currentContact]);
 
+	const handleInputChange = (e) => {
+		const { name, value } = e.target;
+		setEditData((prevData) => {
+			const updatedData = {
+				...prevData,
+				[name]: value,
+			};
+			console.log(updatedData);
+			return updatedData;
+		});
+	};
+
+	console.log(params.contactId);
+
 	const handleEditContact = (e) => {
 		e.preventDefault();
 
@@ -40,16 +52,6 @@ export const Single = props => {
 		actions.editContact(params.contactId, editData);
 	};
 
-	const handleInputChange = (e) => {
-		const { name, value } = e.target;
-		setEditData((prevData) => ({
-			...prevData,
-			[name]: value,
-		}));
-	};
-
-
-
 	return (
 		<div className="jumbotron">
 			<form onSubmit={handleEditContact} className="form ms-3">
@@ -59,9 +61,10 @@ export const Single = props => {
 						type="text"
 						className="form-control"
 						id="inputName"
-						name="inputName"
+						name="full_name"
 						placeholder="Edit your name"
 						value={editData.full_name}
+						defaultValue={editData.full_name}
 						onChange={handleInputChange}
 					/>
 				</div>
@@ -71,9 +74,10 @@ export const Single = props => {
 						type="text"
 						className="form-control"
 						id="inputAddress"
-						name="inputAddress"
+						name="address"
 						placeholder="Edit your Address"
 						value={editData.address}
+						defaultValue={editData.address}
 						onChange={handleInputChange}
 					/>
 				</div>
@@ -83,9 +87,10 @@ export const Single = props => {
 						type="tel"
 						className="form-control"
 						id="inputPhone"
-						name="inputPhone"
+						name="phone"
 						placeholder="Edit your phone number"
 						value={editData.phone}
+						defaultValue={editData.phone}
 						onChange={handleInputChange}
 					/>
 				</div>
@@ -95,9 +100,10 @@ export const Single = props => {
 						type="email"
 						className="form-control"
 						id="inputEmail"
-						name="inputEmail"
+						name="email"
 						placeholder="Edit your email"
 						value={editData.email}
+						defaultValue={editData.email}
 						onChange={handleInputChange}
 					/>
 				</div>

@@ -87,6 +87,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify(editedContact),
 					});
+
+					console.log("Response:", response);
+					
 					if (response.ok) {
 						alert("Contact fixed, good to go!");
 					} else {
