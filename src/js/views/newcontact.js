@@ -33,29 +33,71 @@ export const NewContact = props => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div className="form-group col-4">
-                <label htmlFor="inputName">Full Name</label>
-                <input type="text" className="form-control" id="inputName" name="inputName" placeholder="Enter full name"></input>
+        <div className="container mt-5">
+          <h2 className="mb-4">Please, enter contact details</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label htmlFor="inputName" className="form-label">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputName"
+                  name="inputName"
+                  placeholder="Enter full name"
+                  required
+                />
+              </div>
+              <div className="col-md-6 mb-3">
+                <label htmlFor="inputEmail" className="form-label">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="inputEmail"
+                  name="inputEmail"
+                  placeholder="Enter email"
+                  required
+                />
+              </div>
             </div>
-            <div className="form-group col-4">
-                <label htmlFor="inputAddress">Address</label>
-                <input type="text" className="form-control" id="inputAddress" name="inputAddress" placeholder="Enter Address"></input>
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label htmlFor="inputAddress" className="form-label">
+                  Address
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputAddress"
+                  name="inputAddress"
+                  placeholder="Enter address"
+                  required
+                />
+              </div>
+              <div className="col-md-6 mb-3">
+                <label htmlFor="inputPhone" className="form-label">
+                  Phone
+                </label>
+                <input
+                  type="tel"
+                  className="form-control"
+                  id="inputPhone"
+                  name="inputPhone"
+                  placeholder="Enter phone number"
+                  required
+                />
+              </div>
             </div>
-            <div className="form-group col-4">
-                <label htmlFor="inputPhone">Phone</label>
-                <input type="tel" className="form-control" id="inputPhone" name="inputPhone" placeholder="Enter phone number"></input>
-            </div>
-            <div className="form-group col-4">
-                <label htmlFor="inputEmail">Email</label>
-                <input type="email" className="form-control" id="inputEmail" name="inputEmail" placeholder="Enter email"></input>
-            </div>
-            <button type="submit" className="btn btn-success mt-3">Submit</button>
-
-
-        </form>
-
-    )
+            <button type="submit" className="btn btn-success">
+              Submit
+            </button>
+          </form>
+        </div>
+      );
 
 }
 
