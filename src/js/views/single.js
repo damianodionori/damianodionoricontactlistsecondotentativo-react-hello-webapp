@@ -113,7 +113,7 @@ export const Single = props => {
 					</div>
 				</div>
 				<button type="submit" className="btn btn-success mt-3">
-					Submit
+					Save changes
 				</button>
 			</form>
 
