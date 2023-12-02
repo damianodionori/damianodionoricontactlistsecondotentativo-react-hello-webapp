@@ -53,59 +53,64 @@ export const Single = props => {
 	};
 
 	return (
-		<div className="jumbotron">
+		<div className="container mt-5">
+			<h2 className="mb-4">What do you need to change?</h2>
 			<form onSubmit={handleEditContact} className="form ms-3">
-				<div className="form-group col-4">
-					<label htmlFor="inputName">Full Name</label>
-					<input
-						type="text"
-						className="form-control"
-						id="inputName"
-						name="full_name"
-						placeholder="Edit your name"
-						value={editData.full_name}
-						defaultValue={editData.full_name}
-						onChange={handleInputChange}
-					/>
+				<div className="row">
+					<div className="col-md-6 mb-3">
+						<label htmlFor="inputName">Full Name</label>
+						<input
+							type="text"
+							className="form-control"
+							id="inputName"
+							name="full_name"
+							placeholder="Edit your name"
+							value={editData.full_name}
+							defaultValue={editData.full_name}
+							onChange={handleInputChange}
+						/>
+					</div>
+					<div className="col-md-6 mb-3">
+						<label htmlFor="inputEmail">Email</label>
+						<input
+							type="email"
+							className="form-control"
+							id="inputEmail"
+							name="email"
+							placeholder="Edit your email"
+							value={editData.email}
+							defaultValue={editData.email}
+							onChange={handleInputChange}
+						/>
+					</div>
 				</div>
-				<div className="form-group col-4">
-					<label htmlFor="inputAddress">Address</label>
-					<input
-						type="text"
-						className="form-control"
-						id="inputAddress"
-						name="address"
-						placeholder="Edit your Address"
-						value={editData.address}
-						defaultValue={editData.address}
-						onChange={handleInputChange}
-					/>
-				</div>
-				<div className="form-group col-4">
-					<label htmlFor="inputPhone">Phone</label>
-					<input
-						type="tel"
-						className="form-control"
-						id="inputPhone"
-						name="phone"
-						placeholder="Edit your phone number"
-						value={editData.phone}
-						defaultValue={editData.phone}
-						onChange={handleInputChange}
-					/>
-				</div>
-				<div className="form-group col-4">
-					<label htmlFor="inputEmail">Email</label>
-					<input
-						type="email"
-						className="form-control"
-						id="inputEmail"
-						name="email"
-						placeholder="Edit your email"
-						value={editData.email}
-						defaultValue={editData.email}
-						onChange={handleInputChange}
-					/>
+				<div className="row">
+					<div className="col-md-6 mb-3">
+						<label htmlFor="inputAddress">Address</label>
+						<input
+							type="text"
+							className="form-control"
+							id="inputAddress"
+							name="address"
+							placeholder="Edit your Address"
+							value={editData.address}
+							defaultValue={editData.address}
+							onChange={handleInputChange}
+						/>
+					</div>
+					<div className="col-md-6 mb-3">
+						<label htmlFor="inputPhone">Phone</label>
+						<input
+							type="tel"
+							className="form-control"
+							id="inputPhone"
+							name="phone"
+							placeholder="Edit your phone number"
+							value={editData.phone}
+							defaultValue={editData.phone}
+							onChange={handleInputChange}
+						/>
+					</div>
 				</div>
 				<button type="submit" className="btn btn-success mt-3">
 					Submit
