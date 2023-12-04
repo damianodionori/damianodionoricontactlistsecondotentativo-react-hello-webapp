@@ -35,7 +35,7 @@ export const Contacts = () => {
 											<p> {item.email} </p>
 										</div>
 										<div className="icons col-3 justify-content-end mt-2" >
-										<Link to={`/single/${item.id}`}>
+											<Link to={`/single/edit/${item.id}`}>
 												<button type="button" className="btn btn-warning">
 													Edit
 												</button>

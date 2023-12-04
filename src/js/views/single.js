@@ -6,48 +6,47 @@ import { Context } from "../store/appContext";
 export const Single = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
-	const currentContact = store.contacts.find(contact => contact.id.toString() === params.id);
 
-	const [editData, setEditData] = useState({
-		full_name: "",
-		address: "",
-		phone: "",
-		email: "",
-	});
+	const currentContact = store.contacts.find(contact => contact.id.toString() === params.contactId)
+
+
+	const [fullName, setFullName] = useState('');
+	const [address, setAddress] = useState('');
+	const [phone, setPhone] = useState('');
+	const [email, setEmail] = useState('');
 
 	useEffect(() => {
 		if (currentContact) {
-			setEditData({
-				full_name: currentContact.full_name,
-				address: currentContact.address,
-				phone: currentContact.phone,
-				email: currentContact.email,
-			});
+			setFullName(currentContact.full_name);
+			setAddress(currentContact.address);
+			setPhone(currentContact.phone);
+			setEmail(currentContact.email);
 		}
 	}, [currentContact]);
 
-	const handleInputChange = (e) => {
-		const { name, value } = e.target;
-		setEditData((prevData) => {
-			const updatedData = {
-				...prevData,
-				[name]: value,
-			};
-			console.log(updatedData);
-			return updatedData;
-		});
+	const handleChangeFullName = (e) => {
+		setFullName(e.target.value)
+	};
+	const handleChangeAddress = (e) => {
+		setAddress(e.target.value)
+	};
+	const handleChangePhone = (e) => {
+		setPhone(e.target.value)
+	};
+	const handleChangeEmail = (e) => {
+		setEmail(e.target.value)
 	};
 
-	console.log(params.id);
 
 	const handleEditContact = (e) => {
 		e.preventDefault();
 
-		const { full_name, address, phone, email } = editData;
-		if (!full_name && !address && !phone && !email) {
-			alert('Please edit at least one field.');
-			return;
-		}
+		const editData = {
+			full_name: fullName,
+			address: address,
+			phone: phone,
+			email: email,
+		};
 
 		actions.editContact(params.contactId, editData);
 	};
@@ -63,12 +62,11 @@ export const Single = props => {
 							type="text"
 							className="form-control"
 							id="inputName"
-							name="full_name"
+							name="inputName"
 							placeholder="Edit your name"
-							value={editData.full_name}
-							defaultValue={editData.full_name}
-							onChange={handleInputChange}
-						/>
+							value={fullName}
+							onChange={handleChangeFullName}
+						></input>
 					</div>
 					<div className="col-md-6 mb-3">
 						<label htmlFor="inputEmail">Email</label>
@@ -76,12 +74,11 @@ export const Single = props => {
 							type="email"
 							className="form-control"
 							id="inputEmail"
-							name="email"
+							name="inputEmail"
 							placeholder="Edit your email"
-							value={editData.email}
-							defaultValue={editData.email}
-							onChange={handleInputChange}
-						/>
+							value={email}
+							onChange={handleChangeEmail}
+						></input>
 					</div>
 				</div>
 				<div className="row">
@@ -91,12 +88,11 @@ export const Single = props => {
 							type="text"
 							className="form-control"
 							id="inputAddress"
-							name="address"
+							name="inputAddress"
 							placeholder="Edit your Address"
-							value={editData.address}
-							defaultValue={editData.address}
-							onChange={handleInputChange}
-						/>
+							value={address}
+							onChange={handleChangeAddress}
+						></input>
 					</div>
 					<div className="col-md-6 mb-3">
 						<label htmlFor="inputPhone">Phone</label>
@@ -104,12 +100,11 @@ export const Single = props => {
 							type="tel"
 							className="form-control"
 							id="inputPhone"
-							name="phone"
+							name="inputPhone"
 							placeholder="Edit your phone number"
-							value={editData.phone}
-							defaultValue={editData.phone}
-							onChange={handleInputChange}
-						/>
+							value={phone}
+							onChange={handleChangePhone}
+						></input>
 					</div>
 				</div>
 				<button type="submit" className="btn btn-success mt-3">

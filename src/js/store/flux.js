@@ -91,7 +91,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Response:", response);
 					
 					if (response.ok) {
-						alert("Contact fixed, good to go!");
+						alert("Contact edited successfully!");
 					} else {
 						console.error("Failed to edit contact:", response.statusText);
 						return;
